@@ -19,7 +19,7 @@ class TransactionController extends Controller
     {
         $branches = Branch::all();
         $employees = Employee::all();
-        return view('transaction.create', compact('branches', 'employees'));
+        return view('transactions.create', compact('branches', 'employees'));
     }
 
     public function store(Request $request)
@@ -32,7 +32,7 @@ class TransactionController extends Controller
     {
         $branches = Branch::all();
         $employees = Employee::all();
-        return view('transaction.edit', compact('transaction', 'branches', 'employees'));
+        return view('transactions.edit', compact('transaction', 'branches', 'employees'));
     }
 
     public function update(Request $request, Transaction $transaction)
