@@ -12,8 +12,12 @@ Route::get('/', function () {
 });
 
 
+
+
 Route::resource('branch', BranchController::class);
 Route::resource('employee', EmployeeController::class);
 Route::resource('product', ProductController::class);
 Route::resource('transaction', TransactionController::class);
 Route::resource('transaction-detail', TransactionDetailController::class);
+
+
