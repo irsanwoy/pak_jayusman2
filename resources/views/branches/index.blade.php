@@ -1,35 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Branches</title>
-</head>
-<body>
-    <h1>List of Branches</h1>
-    <table border="1">
-        <thead>
+@extends('layouts.app')
+
+@section('title', 'Branches')
+
+@section('content')
+    <h1>Branches</h1>
+    @component('components.button', ['class' => 'btn-success', 'type' => 'button'])
+        <a href="{{ url('/branches/create') }}" class="text-white text-decoration-none">Add New Branch</a>
+    @endcomponent
+    <hr>
+    @component('components.table', ['headers' => ['ID', 'Branch Name', 'Address', 'City', 'Actions']])
+        @foreach ($branches as $branch)
             <tr>
-                <th>ID</th>
-                <th>Branch Name</th>
-                <th>Address</th>
-                <th>City</th>
+                <td>{{ $branch->id }}</td>
+                <td>{{ $branch->branch_name }}</td>
+                <td>{{ $branch->address }}</td>
+                <td>{{ $branch->city }}</td>
+                <td>
+                    @component('components.button', ['class' => 'btn-warning'])
+                        <a href="{{ url("/branches/{$branch->id}/edit") }}" class="text-white text-decoration-none">Edit</a>
+                    @endcomponent
+                    @component('components.button', ['class' => 'btn-danger', 'onclick' => "deleteBranch({{ $branch->id }})"])
+                        Delete
+                    @endcomponent
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @forelse($branches as $branch)
-                <tr>
-                    <td>{{ $branch->id }}</td>
-                    <td>{{ $branch->branch_name }}</td>
-                    <td>{{ $branch->address }}</td>
-                    <td>{{ $branch->city }}</td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="4">No branches found.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</body>
-</html>
+        @endforeach
+    @endcomponent
+@endsection
