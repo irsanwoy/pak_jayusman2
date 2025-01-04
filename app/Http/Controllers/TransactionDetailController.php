@@ -46,4 +46,5 @@ class TransactionDetailController extends Controller
         $transactionDetail->delete();
         return redirect()->route('transactionDetail.index');
     }
+    
 }

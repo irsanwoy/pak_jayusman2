@@ -16,8 +16,10 @@ class Employee extends Model
         return $this->belongsTo(Branch::class);
     }
 
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
     }
+  
 }
