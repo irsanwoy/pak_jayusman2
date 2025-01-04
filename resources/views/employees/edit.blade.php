@@ -1,56 +1,37 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Edit Pegawai') }}
+        </h2>
+    </x-slot>
 
-@section('title', 'Edit Employee')
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <form action="{{ route('employee.update', $employee->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
-@section('content')
-    <h1>Edit Employee</h1>
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700">Nama</label>
+                            <input type="text" name="name" id="name" value="{{ old('name', $employee->name) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                        </div>
 
-    <!-- Menampilkan pesan error validasi -->
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+                        <div class="mb-4">
+                            <label for="position" class="block text-gray-700">Posisi</label>
+                            <input type="text" name="position" id="position" value="{{ old('position', $employee->position) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="branch_id" class="block text-gray-700">Cabang</label>
+                            <input type="number" name="branch_id" id="branch_id" value="{{ old('branch_id', $employee->branch_id) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                        </div>
+
+                        <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Perbarui</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    @endif
-
-    <!-- Form Edit Employee -->
-    <form action="{{ route('employee.update', $employee->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-        <div class="mb-3">
-            <label for="name" class="form-label">Employee Name</label>
-            <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $employee->name) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="position" class="form-label">Position</label>
-            <select id="position" name="position" class="form-select" required>
-                <option value="">Select Position</option>
-                <option value="Store Manager" {{ old('position', $employee->position) == 'Store Manager' ? 'selected' : '' }}>Store Manager</option>
-                <option value="Supervisor" {{ old('position', $employee->position) == 'Supervisor' ? 'selected' : '' }}>Supervisor</option>
-                <option value="Cashier" {{ old('position', $employee->position) == 'Cashier' ? 'selected' : '' }}>Cashier</option>
-                <option value="Waiter" {{ old('position', $employee->position) == 'Waiter' ? 'selected' : '' }}>Waiter</option>
-                <option value="Cleaner" {{ old('position', $employee->position) == 'Cleaner' ? 'selected' : '' }}>Cleaner</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="branch_id" class="form-label">Branch</label>
-            <select id="branch_id" name="branch_id" class="form-select" required>
-                <option value="">Select Branch</option>
-                @foreach ($branches as $branch)
-                    <option value="{{ $branch->id }}" {{ old('branch_id', $employee->branch_id) == $branch->id ? 'selected' : '' }}>
-                        {{ $branch->branch_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Update Employee</button>
-        <a href="{{ route('employee.index') }}" class="btn btn-secondary">Back</a>
-    </form>
-@endsection
+    </div>
+</x-app-layout>

@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,16 +18,17 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-<<<<<<< HEAD
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-=======
+// <<<<<<< HEAD
+//         User::factory()->create([
+//             'name' => 'Test User',
+//             'email' => 'test@example.com',
+//         ]);
+
         // User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+    
         $this->call([
             BranchSeeder::class,
             EmployeeSeeder::class,
@@ -33,6 +37,7 @@ class DatabaseSeeder extends Seeder
             TransactionDetailSeeder::class,
         ]);
 
->>>>>>> eca7708e3d429ef9e9f3c1657ccd09d3d5a77324
+
     }
+
 }
