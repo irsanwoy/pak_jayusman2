@@ -16,6 +16,36 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        {{-- position --}}
+        <div class="mt-4">
+            <x-input-label for="position" :value="__('Position')" />
+            <select id="position" name="position" class="block mt-1 w-full" required>
+                <option value="" disabled selected>{{ __('Select a Position') }}</option>
+                @foreach ($positions as $position)
+                    <option value="{{ $position }}" {{ old('position') == $position ? 'selected' : '' }}>
+                        {{ $position }}
+                    </option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('position')" class="mt-2" />
+        </div>
+        
+{{-- branch --}}
+        <div class="mt-4">
+            <x-input-label for="branch_id" :value="__('Branch ID')" />
+            <select id="branch_id" name="branch_id" class="block mt-1 w-full" required>
+                <option value="" disabled selected>{{ __('Select a Branch') }}</option>
+                @foreach ($branches as $branch)
+                    <option value="{{ $branch->id }}" {{ old('branch_id') == $branch->id ? 'selected' : '' }}>
+                        {{ $branch->branch_name }}
+                    </option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('branch_id')" class="mt-2" />
+        </div>
+        
+
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />

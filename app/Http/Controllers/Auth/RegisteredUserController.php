@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Employee;
+use App\Models\Branch;
 
 class RegisteredUserController extends Controller
 {
@@ -19,7 +21,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $positions = Employee::getEnumValues('position'); // Ambil nilai ENUM
+        $branches = Branch::select('id', 'branch_name')->get(); // Ambil semua cabang
+        return view('auth.register', compact('positions', 'branches'));
     }
 
     /**
@@ -33,6 +37,8 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'position' => 'required|string|max:255', // Validasi untuk position
+            'branch_id' => 'required|integer', // Validasi untuk branch_id
         ]);
 
         $user = User::create([
@@ -47,4 +53,15 @@ class RegisteredUserController extends Controller
 
         return redirect(route('dashboard', absolute: false));
     }
+
+    public function showRegistrationForm()
+    {
+        // Ambil data dari tabel branches
+        $branches = Branch::select('id', 'branch_name')->get();
+    
+        return view('auth.register', compact('branches'));
+    }
+
+
+    
 }
