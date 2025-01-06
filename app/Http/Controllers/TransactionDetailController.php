@@ -6,7 +6,7 @@ use App\Models\TransactionDetail;
 use App\Models\Transaction;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 class TransactionDetailController extends Controller
 {
     public function index()
@@ -63,4 +63,28 @@ class TransactionDetailController extends Controller
         return redirect()->route('transactionDetail.index');
     }
     
+    public function printDetail($id)
+    {
+        // Ambil data detail transaksi berdasarkan ID
+        $transactionDetail = TransactionDetail::with('transaction', 'product')->findOrFail($id);
+
+        // Generate PDF menggunakan view Blade
+        $pdf = Pdf::loadView('transactionDetail.pdf', compact('transactionDetail'));
+
+        // Unduh atau tampilkan file PDF
+        return $pdf->stream('transactionDetail_' . $transactionDetail->id . '.pdf');
+    }
+
+    public function printAllDetails()
+    {
+        // Ambil semua data detail transaksi
+        $transactionDetails = TransactionDetail::with('transaction', 'product')->get();
+
+        // Generate PDF menggunakan view Blade
+        $pdf = Pdf::loadView('transactionDetail.pdf_all', compact('transactionDetails'));
+
+        // Unduh atau tampilkan file PDF
+        return $pdf->stream('all_transactionDetails.pdf');
+    }
+
 }

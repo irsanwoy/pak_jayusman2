@@ -81,5 +81,9 @@ Route::prefix('transaction-details')->name('transactionDetail.')->group(function
     Route::get('/{transactionDetail}/edit', [TransactionDetailController::class, 'edit'])->name('edit');
     Route::put('/{transactionDetail}', [TransactionDetailController::class, 'update'])->name('update');
     Route::delete('/{transactionDetail}', [TransactionDetailController::class, 'destroy'])->name('destroy');
+
+    // print
+    Route::get('/{id}/print', [TransactionDetailController::class, 'printDetail'])->name('print');
+    Route::get('/print-all', [TransactionDetailController::class, 'printAllDetails'])->name('printAll');
 });
 require __DIR__.'/auth.php';
