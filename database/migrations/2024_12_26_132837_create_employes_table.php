@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('position', ['Store Manager', 'Supervisor', 'Cashier', 'Warehouse']);
+            $table->string('position',255);
             $table->foreignId('branch_id')->constrained('branches')->onDelete('cascade');
             $table->timestamps();
         });
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employes');
+        Schema::dropIfExists('employees');
     }
 };

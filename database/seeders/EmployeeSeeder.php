@@ -15,7 +15,6 @@ class EmployeeSeeder extends Seeder
     public function run()
     {
         
-
         // // Gudang (Gudang Role)
         // $warehouse = Employee::create([
         //     'name' => 'Dewi Kusuma N',
@@ -28,7 +27,7 @@ class EmployeeSeeder extends Seeder
         //     'password' => bcrypt('password123'),
         // ]);
         // $warehouseUser->assignRole('Gudang');
-        // Menambahkan data pegawai
+        // // Menambahkan data pegawai
         // Employee::create([
         //     'name' => 'Budi Santoso',
         //     'position' => 'Store Manager',  // Ganti dengan nilai yang sesuai enum

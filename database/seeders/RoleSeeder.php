@@ -43,7 +43,8 @@ class RoleSeeder extends Seeder
         $manajerTokoRole = Role::findByName('Manajer Toko');
         $manajerTokoRole->givePermissionTo(['create-product', 'read-product', 'update-product', 'delete-product', 'create-pegawai', 'read-pegawai', 'update-pegawai', 'delete-pegawai']);
 
-        $gudangRole = Role::findByName('Gudang');
+
+        $gudangRole = Role::firstOrCreate(['name' => 'Gudang', 'guard_name' => 'web']);
         $gudangRole->givePermissionTo(['read-stok', 'update-stok']);  
 
        
@@ -57,6 +58,15 @@ class RoleSeeder extends Seeder
             'email' => 'rudi.santoso77@domain.com',
             'password' => bcrypt('password123'),
         ]);
+        $storeManagerUser->assignRole('Manajer Toko'); 
+
+        $adminUser = User::create([
+            'name' => 'Jayusman',
+            'email' => 'jayusman@gmail.com',
+            'password' => bcrypt('password123'),
+        ]);
+        $adminUser->assignRole('Admin'); 
+
 
      
         $cashier = Employee::create([
@@ -70,6 +80,7 @@ class RoleSeeder extends Seeder
             'password' => bcrypt('password123'),
         ]);
         $cashierUser->assignRole('Kasir'); 
+        
 
         $supervisor = Employee::create([
             'name' => 'Budi Pratama N',

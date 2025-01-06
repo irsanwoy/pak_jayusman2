@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <!-- Tombol untuk menambah transaksi -->
-                    <a href="{{ route('transaction.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mb-4 inline-block">Tambah Pegawai</a>
+                    <a href="{{ route('transaction.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mb-4 inline-block">Tambah Transaksi</a>
 
                     <!-- Tabel daftar transaksi -->
                     <table class="table-auto w-full text-left border-collapse">
