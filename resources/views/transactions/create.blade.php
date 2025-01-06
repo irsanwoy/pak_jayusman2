@@ -17,7 +17,7 @@
     @endif
 
     <!-- Form Tambah Transaksi -->
-    <form action="{{ route('transaction.store') }}" method="POST">
+    <form action="{{ route('transactions.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">
@@ -55,6 +55,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Save Transaction</button>
-        <a href="{{ route('transaction.index') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ route('transactions.index') }}" class="btn btn-secondary">Back</a>
     </form>
 @endsection

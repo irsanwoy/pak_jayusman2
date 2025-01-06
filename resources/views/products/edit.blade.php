@@ -17,7 +17,7 @@
     @endif
 
     <!-- Form Edit Produk -->
-    <form action="{{ route('product.update', $product->id) }}" method="POST">
+    <form action="{{ route('products.update', $product->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -37,6 +37,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Update Product</button>
-        <a href="{{ route('product.index') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ route('products.index') }}" class="btn btn-secondary">Back</a>
     </form>
 @endsection

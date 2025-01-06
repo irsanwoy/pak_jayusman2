@@ -16,7 +16,7 @@
                 <td>{{ $product->stock }}</td>
                 <td>
                     @component('components.button', ['class' => 'btn-warning'])
-                        <a href="{{ url("/product/{$product->id}/edit") }}" class="text-white text-decoration-none">Edit</a>
+                        <a href="{{ url("/products/{$product->id}/edit") }}" class="text-white text-decoration-none">Edit</a>
                     @endcomponent
 
                     <!-- Form Delete -->

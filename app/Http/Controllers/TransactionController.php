@@ -25,7 +25,7 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         Transaction::create($request->all());
-        return redirect()->route('transaction.index');
+        return redirect()->route('transactions.index');
     }
 
     public function edit(Transaction $transaction)
@@ -38,12 +38,12 @@ class TransactionController extends Controller
     public function update(Request $request, Transaction $transaction)
     {
         $transaction->update($request->all());
-        return redirect()->route('transaction.index');
+        return redirect()->route('transactions.index');
     }
 
     public function destroy(Transaction $transaction)
     {
         $transaction->delete();
-        return redirect()->route('transaction.index');
+        return redirect()->route('transactions.index');
     }
 }

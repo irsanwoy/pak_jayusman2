@@ -17,7 +17,7 @@
     @endif
 
     <!-- Form Tambah Produk -->
-    <form action="{{ route('product.store') }}" method="POST">
+    <form action="{{ route('products.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">
@@ -36,6 +36,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Save Product</button>
-        <a href="{{ route('product.index') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ route('products.index') }}" class="btn btn-secondary">Back</a>
     </form>
 @endsection
