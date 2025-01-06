@@ -17,7 +17,7 @@
     @endif
 
     <!-- Form Tambah Employee -->
-    <form action="{{ route('employee.store') }}" method="POST">
+    <form action="{{ route('employees.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">
@@ -50,6 +50,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Save Employee</button>
-        <a href="{{ route('employee.index') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ route('employees.index') }}" class="btn btn-secondary">Back</a>
     </form>
 @endsection

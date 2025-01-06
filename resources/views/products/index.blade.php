@@ -5,7 +5,7 @@
 @section('content')
     <h1>Products</h1>
     @component('components.button', ['class' => 'btn-success', 'type' => 'button'])
-        <a href="{{ url('/product/create') }}" class="text-white text-decoration-none">Add New Product</a>
+        <a href="{{ url('/products/create') }}" class="text-white text-decoration-none">Add New Product</a>
     @endcomponent
     @component('components.table', ['headers' => ['ID', 'Product Name', 'Price', 'Stock', 'Actions']])
         @foreach ($products as $product)
@@ -20,7 +20,7 @@
                     @endcomponent
 
                     <!-- Form Delete -->
-                    <form action="{{ route('product.destroy', $product->id) }}" method="POST" style="display: inline;">
+                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>

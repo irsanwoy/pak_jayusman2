@@ -17,7 +17,7 @@
     @endif
 
     <!-- Form Edit Employee -->
-    <form action="{{ route('employee.update', $employee->id) }}" method="POST">
+    <form action="{{ route('employees.update', $employee->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -51,6 +51,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Update Employee</button>
-        <a href="{{ route('employee.index') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ route('employees.index') }}" class="btn btn-secondary">Back</a>
     </form>
 @endsection
