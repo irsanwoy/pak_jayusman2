@@ -24,8 +24,24 @@ class TransactionDetailController extends Controller
 
     public function store(Request $request)
     {
-        TransactionDetail::create($request->all());
-        return redirect()->route('transactionDetail.index');
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
+        ]);
+    
+        // Ambil transaction_id secara otomatis
+        $transactionId = Transaction::latest()->first()->id; // Contoh: ambil ID transaksi terbaru
+    
+        // Simpan detail transaksi
+        TransactionDetail::create([
+            'transaction_id' => $transactionId,
+            'product_id' => $validated['product_id'],
+            'quantity' => $validated['quantity'],
+            'price' => $validated['price'],
+        ]);
+    
+        return redirect()->route('transactionDetail.index')->with('success', 'Transaction detail created successfully!');
     }
 
     public function edit(TransactionDetail $transactionDetail)
