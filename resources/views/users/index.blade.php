@@ -70,6 +70,9 @@
                         @endforeach
                         </tbody>
                         </table>
+                        <div>
+                            {{ $users->links() }}
+                        </div>
 
                     <x-modal name="confirm-user-deletion" focusable maxWidth="xl">
                         <form method="post" x-bind:action="action" class="p-6">

@@ -13,16 +13,17 @@
                     <form action="{{ route('transactionDetail.store') }}" method="POST" class="space-y-6">
                         @csrf
 
-                        <!-- Transaction ID -->
+                        <!-- Product Dropdown -->
                         <div>
-                            <label for="transaction_id" class="block text-sm font-medium text-gray-700">Transaction ID</label>
-                            <input type="number" name="transaction_id" id="transaction_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
-                        </div>
-
-                        <!-- Product ID -->
-                        <div>
-                            <label for="product_id" class="block text-sm font-medium text-gray-700">Product ID</label>
-                            <input type="number" name="product_id" id="product_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                            <label for="product_id" class="block text-sm font-medium text-gray-700">Product</label>
+                            <select name="product_id" id="product_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                                <option value="">-- Select Product --</option>
+                                @foreach ($products as $product)
+                                    <option value="{{ $product->id }}" data-price="{{ $product->price }}">
+                                        {{ $product->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <!-- Quantity -->
@@ -31,10 +32,10 @@
                             <input type="number" name="quantity" id="quantity" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
                         </div>
 
-                        <!-- Price -->
+                        <!-- Price (Auto-filled) -->
                         <div>
                             <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-                            <input type="number" name="price" id="price" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                            <input type="number" name="price" id="price" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" readonly>
                         </div>
 
                         <!-- Tombol Simpan -->
@@ -47,4 +48,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Mengisi harga otomatis saat produk dipilih
+        document.getElementById('product_id').addEventListener('change', function () {
+            const selectedOption = this.options[this.selectedIndex];
+            const price = selectedOption.getAttribute('data-price');
+            document.getElementById('price').value = price ? price : '';
+        });
+    </script>
 </x-app-layout>

@@ -9,6 +9,17 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+                    <h1>Search branch</h1>
+                    <form method="GET" action="{{ route('branch.index') }}">
+                        <input 
+                            type="text" 
+                            name="search" 
+                            placeholder="Search branches..." 
+                            value="{{ request('search') }}" 
+                            class="border rounded p-2">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Search</button>
+                    </form>
+                    <br>
                     <!-- Tombol untuk menambah branch -->
                     <a href="{{ route('branch.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mb-4 inline-block">Tambah Branch</a>
 
@@ -45,7 +56,9 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                    <div>
+                        {{ $branches->links() }}
+                    </div>
             </div>
         </div>
     </div>
