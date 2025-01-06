@@ -14,7 +14,6 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Transaction ID</th>
                 <th>Product</th>
                 <th>Quantity</th>
@@ -25,12 +24,11 @@
         <tbody>
             @foreach ($transactionDetails as $detail)
                 <tr>
-                    <td>{{ $detail->id }}</td>
-                    <td>{{ $detail->transaction->id }}</td>
-                    <td>{{ $detail->product->product_name }}</td>
+                    <td>{{ $detail->transaction->id ?? 'N/A' }}</td>
+                    <td>{{ $detail->product->product_name ?? 'N/A' }}</td>
                     <td>{{ $detail->quantity }}</td>
-                    <td>{{ $detail->price }}</td>
-                    <td>{{ $detail->quantity * $detail->price }}</td>
+                    <td>{{ number_format($detail->price, 0, ',', '.') }}</td>
+                    <td>{{ number_format($detail->quantity * $detail->price, 0, ',', '.') }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -76,15 +76,16 @@ class TransactionDetailController extends Controller
     }
 
     public function printAllDetails()
-    {
-        // Ambil semua data detail transaksi
-        $transactionDetails = TransactionDetail::with('transaction', 'product')->get();
+{
+    // Ambil semua data detail transaksi
+    $transactionDetails = TransactionDetail::with('transaction', 'product')->get();
 
-        // Generate PDF menggunakan view Blade
-        $pdf = Pdf::loadView('transactionDetail.pdf_all', compact('transactionDetails'));
+    // Generate PDF menggunakan view Blade
+    $pdf = Pdf::loadView('transactionDetail.pdf_all', compact('transactionDetails'));
 
-        // Unduh atau tampilkan file PDF
-        return $pdf->stream('all_transactionDetails.pdf');
-    }
+    // Tampilkan atau unduh file PDF
+    return $pdf->stream('all_transactionDetails.pdf');
+}
+
 
 }

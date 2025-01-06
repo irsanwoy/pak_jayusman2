@@ -33,25 +33,26 @@
                                     <td class="border px-4 py-2">
                                         <!-- Tombol Edit -->
                                         <a href="{{ route('transactionDetail.edit', $detail->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 inline-block">Edit</a>
-
+                        
                                         <!-- Form Hapus -->
                                         <form action="{{ route('transactionDetail.destroy', $detail->id) }}" method="POST" style="display:inline-block;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600" onclick="return confirm('Are you sure?')">Delete</button>
                                         </form>
-
-                                        {{-- print --}}
-                                        <a href="{{ route('transactionDetail.print', $transactionDetail->id) }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Print</a>
-
+                        
+                                        <!-- Tombol Print -->
+                                        <a href="{{ route('transactionDetail.print', $detail->id) }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Print</a>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
+                        
                     </table>
 
                     {{-- print all --}}
                     <a href="{{ route('transactionDetail.printAll') }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 mb-4 inline-block">Print All Details</a>
+
 
                 </div>
             </div>
