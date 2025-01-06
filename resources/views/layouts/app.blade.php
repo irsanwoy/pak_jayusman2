@@ -72,4 +72,6 @@
             }
         </script>
     </body>
+    <x-footer />
+
 </html>
