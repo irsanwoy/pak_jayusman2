@@ -9,11 +9,25 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 class TransactionDetailController extends Controller
 {
-    public function index()
-    {
-        $transactionDetails = TransactionDetail::all();
-        return view('transactionDetail.index', compact('transactionDetails'));
+    public function index(Request $request)
+{
+    $query = TransactionDetail::with('transaction', 'product');
+
+    // Search functionality
+    if ($request->has('search')) {
+        $search = $request->input('search');
+        $query->where('transaction_id', 'like', '%' . $search . '%')
+              ->orWhereHas('product', function ($q) use ($search) {
+                  $q->where('product_name', 'like', '%' . $search . '%');
+              });
     }
+
+    // Pagination
+    $transactionDetails = $query->paginate(5);
+
+    return view('transactionDetail.index', compact('transactionDetails'));
+}
+
 
     public function create()
     {
