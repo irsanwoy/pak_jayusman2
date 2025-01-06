@@ -5,7 +5,7 @@
 @section('content')
     <h1>Create New Branch</h1>
 
-    <form action="{{ route('branch.store') }}" method="POST">
+    <form action="{{ route('branches.store') }}" method="POST">
         @csrf <!-- Token keamanan untuk mencegah CSRF -->
 
         <div class="form-group">
@@ -24,6 +24,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
-        <a href="{{ route('branch.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('branches.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 @endsection

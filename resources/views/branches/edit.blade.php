@@ -5,7 +5,7 @@
 @section('content')
     <h1>Edit Branch</h1>
 
-    <form action="{{ route('branch.update', $branch->id) }}" method="POST">
+    <form action="{{ route('branches.update', $branch->id) }}" method="POST">
         @csrf <!-- Token keamanan untuk mencegah CSRF -->
         @method('PUT') <!-- Metode HTTP PUT untuk update -->
 
@@ -45,6 +45,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Save Changes</button>
-        <a href="{{ route('branch.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('branches.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 @endsection
