@@ -7,11 +7,24 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
-    {
-        $products = Product::all();
-        return view('products.index', compact('products'));
+    public function index(Request $request)
+{
+    $query = Product::query();
+
+    // Search functionality
+    if ($request->has('search')) {
+        $search = $request->input('search');
+        $query->where('product_name', 'like', '%' . $search . '%')
+              ->orWhere('price', 'like', '%' . $search . '%')
+              ->orWhere('stock', 'like', '%' . $search . '%');
     }
+
+    // Pagination
+    $products = $query->paginate(5);
+
+    return view('products.index', compact('products'));
+}
+
 
     public function create()
     {

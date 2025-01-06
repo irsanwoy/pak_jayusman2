@@ -49,6 +49,7 @@ Route::prefix('products')->name('product.')->group(function () {
     Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('edit');
     Route::put('/{product}', [ProductController::class, 'update'])->name('update');
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
+
 });
 
 Route::prefix('branches')->name('branch.')->group(function () {
@@ -67,6 +68,10 @@ Route::prefix('transactions')->name('transaction.')->group(function () {
     Route::get('/{transaction}/edit', [TransactionController::class, 'edit'])->name('edit');
     Route::put('/{transaction}', [TransactionController::class, 'update'])->name('update');
     Route::delete('/{transaction}', [TransactionController::class, 'destroy'])->name('destroy');
+
+    Route::get('/{id}/print', [TransactionController::class, 'printTransaction'])->name('print');
+Route::get('/print-all', [TransactionController::class, 'printAllTransactions'])->name('printAll');
+
 });
 
 Route::prefix('transaction-details')->name('transactionDetail.')->group(function () {

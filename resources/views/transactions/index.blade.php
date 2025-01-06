@@ -12,6 +12,12 @@
                     <!-- Tombol untuk menambah transaksi -->
                     <a href="{{ route('transaction.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mb-4 inline-block">Tambah Transaksi</a>
 
+                    <!-- Form pencarian -->
+                    <form method="GET" action="{{ route('transaction.index') }}" class="mb-4">
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari transaksi..." class="border rounded-md px-4 py-2">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Cari</button>
+                    </form>
+
                     <!-- Tabel daftar transaksi -->
                     <table class="table-auto w-full text-left border-collapse">
                         <thead>
@@ -25,7 +31,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($transactions as $transaction)
+                            @forelse ($transactions as $transaction)
                                 <tr>
                                     <td class="border px-4 py-2">{{ $transaction->id }}</td>
                                     <td class="border px-4 py-2">{{ $transaction->date }}</td>
@@ -42,11 +48,30 @@
                                             @method('DELETE')
                                             <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600" onclick="return confirm('Are you sure?')">Delete</button>
                                         </form>
+                                        {{-- print --}}
+                                        <a href="{{ route('transaction.print', $transaction->id) }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Print</a>
+
+
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center py-4">No transactions found</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
+
+                    {{-- print all --}}
+
+                    <a href="{{ route('transaction.printAll') }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 mb-4 inline-block">Print All Transactions</a>
+
+
+
+                    <!-- Pagination -->
+                    <div class="mt-4">
+                        {{ $transactions->withQueryString()->links() }}
+                    </div>
                 </div>
             </div>
         </div>

@@ -7,13 +7,34 @@ use App\Models\Branch;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class TransactionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $transactions = Transaction::all();
+        $query = Transaction::query();
+    
+        // Search functionality
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('id', 'like', '%' . $search . '%')
+                  ->orWhere('date', 'like', '%' . $search . '%')
+                  ->orWhere('total', 'like', '%' . $search . '%')
+                  ->orWhereHas('branch', function ($q) use ($search) {
+                      $q->where('branch_name', 'like', '%' . $search . '%');
+                  })
+                  ->orWhereHas('employee', function ($q) use ($search) {
+                      $q->where('name', 'like', '%' . $search . '%');
+                  });
+        }
+    
+        // Pagination
+        $transactions = $query->paginate(5);
+    
         return view('transactions.index', compact('transactions'));
     }
+    
 
     public function create()
     {
@@ -46,4 +67,29 @@ class TransactionController extends Controller
         $transaction->delete();
         return redirect()->route('transaction.index');
     }
+
+    public function printTransaction($id)
+{
+    // Ambil data transaksi berdasarkan ID
+    $transaction = Transaction::with('branch', 'employee', 'transactionDetails')->findOrFail($id);
+
+    // Generate PDF menggunakan view Blade
+    $pdf = Pdf::loadView('transactions.pdf', compact('transaction'));
+
+    // Unduh atau tampilkan file PDF
+    return $pdf->stream('transaction_' . $transaction->id . '.pdf');
+}
+
+public function printAllTransactions()
+{
+    // Ambil semua data transaksi
+    $transactions = Transaction::with('branch', 'employee')->get();
+
+    // Generate PDF menggunakan view Blade
+    $pdf = Pdf::loadView('transactions.pdf_all', compact('transactions'));
+
+    // Unduh atau tampilkan file PDF
+    return $pdf->stream('all_transactions.pdf');
+}
+
 }

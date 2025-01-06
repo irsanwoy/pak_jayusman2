@@ -14,24 +14,42 @@
                         @csrf
 
                         <!-- Product Dropdown -->
-                        <div>
+                        {{-- <div>
                             <label for="product_id" class="block text-sm font-medium text-gray-700">Product</label>
-                            <select name="product_id" id="product_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                            <select name="product_id" id="product_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-black" required>
                                 <option value="">-- Select Product --</option>
                                 @foreach ($products as $product)
                                     <option value="{{ $product->id }}" data-price="{{ $product->price }}">
-                                        {{ $product->name }}
+                                        {{ $product->product_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div> --}}
+                        <div>
+                            <label for="product_id" class="block text-sm font-medium text-gray-700">Product</label>
+                            <select name="product_id" id="product_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                                <option value="" data-price="0">-- Select Product --</option>
+                                @foreach ($products as $product)
+                                    <option value="{{ $product->id }}" data-price="{{ $product->price }}">
+                                        {{ $product->product_name }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-
-                        <!-- Quantity -->
-                        <div>
+                        
+                        <div class="mt-4">
                             <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
-                            <input type="number" name="quantity" id="quantity" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                            <input type="number" id="quantity" name="quantity" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" min="1" value="1">
                         </div>
-
+                        
+                        <div class="mt-4">
+                            <label for="total_price" class="block text-sm font-medium text-gray-700">Total Price</label>
+                            <input type="text" id="total_price" name="total_price" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" readonly>
+                        </div>
+                        
+                        
+                        
+                     
                         <!-- Price (Auto-filled) -->
                         <div>
                             <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
@@ -55,6 +73,23 @@
             const selectedOption = this.options[this.selectedIndex];
             const price = selectedOption.getAttribute('data-price');
             document.getElementById('price').value = price ? price : '';
-        });
+        }),
+        document.addEventListener('DOMContentLoaded', function () {
+        const productSelect = document.getElementById('product_id');
+        const quantityInput = document.getElementById('quantity');
+        const totalPriceInput = document.getElementById('total_price');
+
+        function calculateTotal() {
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            const price = parseFloat(selectedOption.getAttribute('data-price')) || 0;
+            const quantity = parseInt(quantityInput.value) || 1;
+            const totalPrice = price * quantity;
+            totalPriceInput.value = totalPrice.toFixed(2); // Format to 2 decimal places
+        }
+
+        // Event listeners for changes
+        productSelect.addEventListener('change', calculateTotal);
+        quantityInput.addEventListener('input', calculateTotal);
+    });
     </script>
 </x-app-layout>
