@@ -7,15 +7,45 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionDetailController;
+
+
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+// ini yang normal
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+//menggunakan kontroler
+
+// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+
+
+// menggunakan middleware
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    // This route will only redirect users based on their role.
+})->middleware(['auth', \App\Http\Middleware\RoleMiddleware::class])->name('dashboard');
+
+
+Route::get('/dashboard/admin', [DashboardController::class, 'admin'])->name('dashboard.admin');
+Route::get('/dashboard/kasir', [DashboardController::class, 'kasir'])->name('dashboard.kasir');
+Route::get('/dashboard/supervisor', [DashboardController::class, 'supervisor'])->name('dashboard.supervisor');
+Route::get('/dashboard/manajer', [DashboardController::class, 'manajer'])->name('dashboard.manajer');
+Route::get('/dashboard/gudang', [DashboardController::class, 'gudang'])->name('dashboard.gudang');
+
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

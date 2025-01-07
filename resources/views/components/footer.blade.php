@@ -12,28 +12,32 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Anggota 1 -->
                 <div class="card bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 text-center">
-                    <img src="path-to-foto1.jpg" alt="Foto Anggota 1" class="w-24 h-24 rounded-full mx-auto mb-4">
-                    <h3 class="text-lg font-bold">Nama Anggota 1</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-300">NPM: 1234567890</p>
-                    <a href="https://github.com/anggota1" target="_blank" class="text-primary hover:underline">
-                        GitHub
-                    </a>
-                </div>
+    {{-- <img src=""> --}}
+
+    <h3 class="text-lg font-bold">Rian Asmara</h3>
+    <p class="text-sm text-gray-600 dark:text-gray-300">NPM: 1234567890</p>
+    <a href="https://github.com/anggota1" target="_blank" class="text-primary hover:underline">
+        GitHub
+    </a>
+</div>
+
 
                 <!-- Anggota 2 -->
                 <div class="card bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 text-center">
-                    <img src="path-to-foto2.jpg" alt="Foto Anggota 2" class="w-24 h-24 rounded-full mx-auto mb-4">
-                    <h3 class="text-lg font-bold">Nama Anggota 2</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-300">NPM: 0987654321</p>
-                    <a href="https://github.com/anggota2" target="_blank" class="text-primary hover:underline">
+                    {{-- <img src="">
+                    <img src="{{ asset('images/rian.png') }}" alt="Example Image" class="w-24 h-24 rounded-full mx-auto mb-4"> --}}
+                
+                    <h3 class="text-lg font-bold">Rian Asmara</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">NPM: 1234567890</p>
+                    <a href="https://github.com/anggota1" target="_blank" class="text-primary       hover:underline">
                         GitHub
                     </a>
                 </div>
+                
 
                 <!-- Anggota 3 -->
                 <div class="card bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 text-center">
-                    <img src="path-to-foto3.jpg" alt="Foto Anggota 3" class="w-24 h-24 rounded-full mx-auto mb-4">
-                    <h3 class="text-lg font-bold">Nama Anggota 3</h3>
+                    <h3 class="text-lg font-bold">RIjky Hardiyanty</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-300">NPM: 1122334455</p>
                     <a href="https://github.com/anggota3" target="_blank" class="text-primary hover:underline">
                         GitHub

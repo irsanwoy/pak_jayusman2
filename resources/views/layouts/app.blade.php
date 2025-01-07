@@ -17,6 +17,7 @@
     </head>
     <body class="bg-light dark:bg-dark text-textLight dark:text-textDark">
         <div class="min-h-screen bg-light dark:bg-dark">
+            
             @include('layouts.navigation')
 
             <!-- Page Heading -->
