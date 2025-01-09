@@ -36,27 +36,85 @@ class TransactionDetailController extends Controller
         return view('transactionDetail.create', compact('transactions', 'products'));
     }
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1',
-            'price' => 'required|numeric|min:0',
-        ]);
-    
-        // Ambil transaction_id secara otomatis
-        $transactionId = Transaction::latest()->first()->id; // Contoh: ambil ID transaksi terbaru
-    
-        // Simpan detail transaksi
-        TransactionDetail::create([
-            'transaction_id' => $transactionId,
-            'product_id' => $validated['product_id'],
-            'quantity' => $validated['quantity'],
-            'price' => $validated['price'],
-        ]);
-    
-        return redirect()->route('transactionDetail.index')->with('success', 'Transaction detail created successfully!');
+//     public function store(Request $request)
+// {
+//     $request->validate([
+//         'product_id' => 'required|exists:products,id',
+//         'quantity' => 'required|integer|min:1',
+//     ]);
+
+//     // Ambil data produk berdasarkan ID
+//     $product = Product::find($request->product_id);
+
+//     // Pastikan produk ditemukan
+//     if (!$product) {
+//         return redirect()->back()->withErrors(['error' => 'Product not found']);
+//     }
+
+//     // Cek stok apakah mencukupi
+//     if ($product->stock < $request->quantity) {
+//         return redirect()->back()->withErrors(['error' => 'Stok produk tidak mencukupi']);
+//     }
+
+//     // Kurangi stok produk
+//     $product->stock -= $request->quantity;
+//     $product->save();
+
+//     // Simpan detail transaksi
+//     TransactionDetail::create([
+//         'product_id' => $request->product_id,
+//         'quantity' => $request->quantity,
+//         'price' => $product->price,
+//         'total_price' => $product->price * $request->quantity,
+//     ]);
+
+//     return redirect()->route('transactionDetail.index')->with('success', 'Transaksi berhasil dibuat dan stok berkurang.');
+// }
+public function store(Request $request)
+{
+    $request->validate([
+        'product_id' => 'required|exists:products,id',
+        'quantity' => 'required|integer|min:1',
+    ]);
+
+    // Ambil transaksi terbaru (atau logika lain untuk menentukan ID)
+    $latestTransaction = Transaction::latest()->first();
+
+    if (!$latestTransaction) {
+        return redirect()->back()->withErrors(['error' => 'No transactions available.']);
     }
+
+    $transactionId = $latestTransaction->id;
+
+    // Ambil data produk berdasarkan ID
+    $product = Product::find($request->product_id);
+
+    if (!$product) {
+        return redirect()->back()->withErrors(['error' => 'Product not found']);
+    }
+
+    // Cek stok apakah mencukupi
+    if ($product->stock < $request->quantity) {
+        return redirect()->back()->withErrors(['error' => 'Insufficient stock']);
+    }
+
+    // Kurangi stok produk
+    $product->stock -= $request->quantity;
+    $product->save();
+
+    // Simpan detail transaksi dengan transaction_id otomatis
+    TransactionDetail::create([
+        'transaction_id' => $transactionId,
+        'product_id' => $request->product_id,
+        'quantity' => $request->quantity,
+        'price' => $product->price,
+        'total_price' => $product->price * $request->quantity,
+    ]);
+
+    return redirect()->route('transactionDetail.index')->with('success', 'Transaction detail created successfully.');
+}
+
+
 
     public function edit(TransactionDetail $transactionDetail)
     {

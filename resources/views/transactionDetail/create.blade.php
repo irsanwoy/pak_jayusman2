@@ -13,18 +13,7 @@
                     <form action="{{ route('transactionDetail.store') }}" method="POST" class="space-y-6">
                         @csrf
 
-                        <!-- Product Dropdown -->
-                        {{-- <div>
-                            <label for="product_id" class="block text-sm font-medium text-gray-700">Product</label>
-                            <select name="product_id" id="product_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-black" required>
-                                <option value="">-- Select Product --</option>
-                                @foreach ($products as $product)
-                                    <option value="{{ $product->id }}" data-price="{{ $product->price }}">
-                                        {{ $product->product_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div> --}}
+                
                         <div>
                             <label for="product_id" class="block text-sm font-medium text-gray-700">Product</label>
                             <select name="product_id" id="product_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>

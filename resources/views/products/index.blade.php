@@ -26,7 +26,10 @@
                                 <th class="border px-4 py-2 dark:border-gray-600">Product Name</th>
                                 <th class="border px-4 py-2 dark:border-gray-600">Price</th>
                                 <th class="border px-4 py-2 dark:border-gray-600">Stock</th>
+                    @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko') || auth()->user()->hasRole('Gudang'))
+
                                 <th class="border px-4 py-2 dark:border-gray-600">Actions</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -36,6 +39,8 @@
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $product->product_name }}</td>
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $product->price }}</td>
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $product->stock }}</td>
+                    @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko') || auth()->user()->hasRole('Gudang'))
+
                                     <td class="border px-4 py-2 dark:border-gray-600">
                                         <a href="{{ route('product.edit', $product->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 inline-block">Edit</a>
                                         <form action="{{ route('product.destroy', $product->id) }}" method="POST" style="display:inline-block;">
@@ -44,6 +49,7 @@
                                             <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600" onclick="return confirm('Are you sure?')">Delete</button>
                                         </form>
                                     </td>
+                                    @endif
                                 </tr>
                             @empty
                                 <tr>

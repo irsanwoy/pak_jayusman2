@@ -27,7 +27,10 @@
                                 <th class="border px-4 py-2 dark:border-gray-600">Branch</th>
                                 <th class="border px-4 py-2 dark:border-gray-600">Employee</th>
                                 <th class="border px-4 py-2 dark:border-gray-600">Total</th>
+                    @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Kasir') )
+
                                 <th class="border px-4 py-2 dark:border-gray-600">Actions</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -38,6 +41,8 @@
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $transaction->branch->branch_name ?? 'N/A' }}</td>
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $transaction->employee->name ?? 'N/A' }}</td>
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $transaction->total }}</td>
+                    @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Kasir') )
+
                                     <td class="border px-4 py-2 dark:border-gray-600">
                                         <a href="{{ route('transaction.edit', $transaction->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 inline-block">Edit</a>
                                         <form action="{{ route('transaction.destroy', $transaction->id) }}" method="POST" style="display:inline-block;">
@@ -47,6 +52,7 @@
                                         </form>
                                         <a href="{{ route('transaction.print', $transaction->id) }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Print</a>
                                     </td>
+                                    @endif
                                 </tr>
                             @empty
                                 <tr>

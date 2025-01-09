@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Models\Branch;
+use App\Models\Product;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -44,10 +45,48 @@ class TransactionController extends Controller
     }
 
     public function store(Request $request)
-    {
-        Transaction::create($request->all());
-        return redirect()->route('transaction.index');
+{
+    $request->validate([
+        'id' => 'required|exists:products,id',
+        'quantity' => 'required|integer|min:1',
+    ]);
+
+    $product = Product::find($request->id);
+
+    if (!$product) {
+        dd('Product not found');
     }
+
+    if ($product->stock < $request->quantity) {
+        return redirect()->back()->withErrors(['error' => 'Stok tidak mencukupi']);
+    }
+
+    // Debug sebelum mengurangi stok
+    dd([
+        'Product ID' => $product->id,
+        'Stock Sebelum' => $product->stock,
+        'Quantity Request' => $request->quantity,
+    ]);
+
+    $product->stock -= $request->quantity;
+    $product->save();
+
+    // Debug setelah mengurangi stok
+    if ($product->wasChanged('stock')) {
+        dd('Stok berhasil dikurangi');
+    } else {
+        dd('Stok gagal diperbarui');
+    }
+
+    Transaction::create([
+        'product_id' => $request->id,
+        'quantity' => $request->quantity,
+    ]);
+
+    return redirect()->route('transaction.index')->with('success', 'Transaksi berhasil!');
+}
+
+
 
     public function edit(Transaction $transaction)
     {
