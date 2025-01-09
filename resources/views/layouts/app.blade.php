@@ -36,9 +36,9 @@
         </div>
 
         <!-- Tombol Toggle -->
-        <button id="theme-toggle" class="fixed bottom-4 right-4 bg-primary text-white p-3 rounded-full shadow-md">
+        {{-- <button id="theme-toggle" class="fixed bottom-4 right-4 bg-primary text-white p-3 rounded-full shadow-md">
             <i id="theme-icon" class="fas fa-moon"></i>
-        </button>
+        </button> --}}
 
         <!-- Script untuk Toggle Dark Mode -->
         <script>

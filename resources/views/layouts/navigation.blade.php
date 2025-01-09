@@ -2,6 +2,10 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
+            <!-- Tombol Toggle Dark Mode -->
+<button id="theme-toggle" class="bg-primary text-white p-2 rounded-full shadow-md">
+    <i id="theme-icon" class="fas fa-moon"></i>
+</button>
             <!-- Logo -->
             <div class="shrink-0 flex items-center">
                 <a href="{{ route('dashboard') }}" class="flex items-center space-x-2">
