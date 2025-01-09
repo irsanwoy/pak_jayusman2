@@ -1,10 +1,10 @@
 <footer class="bg-dark text-textDark text-center py-6">
     <!-- Marquee untuk teks -->
-    <div class="marquee bg-primary text-white py-2">
+    {{-- <div class="marquee bg-primary text-white py-2">
         <p class="text-center text-sm">
             Welcome to our website! 🚀 | Check out our latest updates! 🎉 | Follow us on GitHub! 👨‍💻
         </p>
-    </div>
+    </div> --}}
 
     <!-- Animasi Card -->
     <div class="bg-dark text-textDark py-6">
