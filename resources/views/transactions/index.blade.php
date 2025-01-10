@@ -10,7 +10,10 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-600">
                     <!-- Tombol untuk menambah transaksi -->
+                    @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko') || auth()->user()->hasRole('Gudang'))
+
                     <a href="{{ route('transaction.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mb-4 inline-block">Tambah Transaksi</a>
+                    @endif
 
                     <!-- Form pencarian -->
                     <form method="GET" action="{{ route('transaction.index') }}" class="mb-4">
@@ -41,7 +44,7 @@
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $transaction->branch->branch_name ?? 'N/A' }}</td>
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $transaction->employee->name ?? 'N/A' }}</td>
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $transaction->total }}</td>
-                    @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Kasir') )
+                    @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko') )
 
                                     <td class="border px-4 py-2 dark:border-gray-600">
                                         <a href="{{ route('transaction.edit', $transaction->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 inline-block">Edit</a>
@@ -61,9 +64,11 @@
                             @endforelse
                         </tbody>
                     </table>
+                    @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko')  )
+
 
                     <a href="{{ route('transaction.printAll') }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 mb-4 inline-block">Print All Transactions</a>
-
+                    @endif
                     <!-- Pagination -->
                     <div class="mt-4">
                         {{ $transactions->withQueryString()->links() }}

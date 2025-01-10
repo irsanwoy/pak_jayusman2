@@ -33,6 +33,7 @@ Route::get('/', function () {
 
 // menggunakan middleware
 Route::get('/dashboard', function () {
+    return view('dashboard');
     // This route will only redirect users based on their role.
 })->middleware(['auth', \App\Http\Middleware\RoleMiddleware::class])->name('dashboard');
 

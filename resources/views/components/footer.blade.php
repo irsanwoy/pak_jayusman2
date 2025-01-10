@@ -1,10 +1,10 @@
 <footer class="bg-dark text-textDark text-center py-6">
     <!-- Marquee untuk teks -->
-    {{-- <div class="marquee bg-primary text-white py-2">
+     <div class="marquee bg-primary text-white py-2">
         <p class="text-center text-sm">
             Welcome to our website! 🚀 | Check out our latest updates! 🎉 | Follow us on GitHub! 👨‍💻
         </p>
-    </div> --}}
+    </div> 
 
     <!-- Animasi Card -->
     <div class="bg-dark text-textDark py-6">
@@ -14,8 +14,8 @@
                 <div class="card bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 text-center">
     {{-- <img src=""> --}}
 
-    <h3 class="text-lg font-bold">Rian Asmara</h3>
-    <p class="text-sm text-gray-600 dark:text-gray-300">NPM: 1234567890</p>
+    <h3 class="text-lg font-bold">M Irsan</h3>
+    <p class="text-sm text-gray-600 dark:text-gray-300">NPM: 5520122026</p>
     <a href="https://github.com/anggota1" target="_blank" class="text-primary hover:underline">
         GitHub
     </a>
@@ -27,8 +27,8 @@
                     {{-- <img src="">
                     <img src="{{ asset('images/rian.png') }}" alt="Example Image" class="w-24 h-24 rounded-full mx-auto mb-4"> --}}
                 
-                    <h3 class="text-lg font-bold">Rian Asmara</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-300">NPM: 1234567890</p>
+                    <h3 class="text-lg font-bold">Riansyah Asmara</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">NPM: 5520122025</p>
                     <a href="https://github.com/anggota1" target="_blank" class="text-primary       hover:underline">
                         GitHub
                     </a>
@@ -37,8 +37,8 @@
 
                 <!-- Anggota 3 -->
                 <div class="card bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 text-center">
-                    <h3 class="text-lg font-bold">RIjky Hardiyanty</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-300">NPM: 1122334455</p>
+                    <h3 class="text-lg font-bold">Rijki Hardiyanti</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">NPM: 5520122005</p>
                     <a href="https://github.com/anggota3" target="_blank" class="text-primary hover:underline">
                         GitHub
                     </a>
@@ -46,7 +46,7 @@
             </div>
 
             <!-- Copyright -->
-            <p class="mt-6 text-center text-sm">&copy; {{ date('Y') }} Your Project Name. All rights reserved.</p>
+            <p class="mt-6 text-center text-sm">&copy; {{ date('Y') }} Project kelompok 4.</p>
         </div>
     </div>
 </footer>

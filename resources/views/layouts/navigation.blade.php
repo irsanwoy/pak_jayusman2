@@ -41,7 +41,7 @@
                 </x-nav-link>
                 @endif
 
-                @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Kasir') || auth()->user()->hasRole('Supervisor'))
+                @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko') || auth()->user()->hasRole('Supervisor'))
                 <x-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.index')" class="hover:bg-orange-500 px-3 py-2 rounded transition">
                     <i class="fas fa-receipt mr-2"></i> {{ __('Transaction') }}
                 </x-nav-link>

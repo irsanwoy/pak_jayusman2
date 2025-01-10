@@ -14,9 +14,11 @@
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." class="border rounded-md px-4 py-2 text-gray-900 dark:text-gray-100 dark:bg-gray-700">
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Search</button>
                     </form>
+                    @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko') || auth()->user()->hasRole('Gudang'))
 
                     <!-- Tombol untuk menambah produk -->
                     <a href="{{ route('product.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mb-4 inline-block">Add New Product</a>
+                    @endif
 
                     <!-- Tabel daftar produk -->
                     <table class="table-auto w-full text-left border-collapse text-gray-900 dark:text-gray-100">
