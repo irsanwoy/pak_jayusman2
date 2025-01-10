@@ -48,14 +48,14 @@ class RoleSeeder extends Seeder
         $gudangRole->givePermissionTo(['read-stok', 'update-stok']);  
 
        
-          $storeManager = Employee::create([
+        $storeManager = Employee::create([
             'name' => 'Rudi Santoso Adiguna',
             'position' => 'Store Manager',  
             'branch_id' => 1,  
         ]);
         $storeManagerUser = User::create([
             'name' => 'Rudi Santoso Adiguna',
-            'email' => 'rudi.santoso77@domain.com',
+            'email' => 'rudi.santoso77@gmail.com',
             'password' => bcrypt('password123'),
         ]);
         $storeManagerUser->assignRole('Manajer Toko'); 
@@ -76,7 +76,7 @@ class RoleSeeder extends Seeder
         ]);
         $cashierUser = User::create([
             'name' => 'Siti Cahya',
-            'email' => 'siti.cahya22@domain.com',
+            'email' => 'siti.cahya22@gmail.com',
             'password' => bcrypt('password123'),
         ]);
         $cashierUser->assignRole('Kasir'); 
@@ -89,7 +89,7 @@ class RoleSeeder extends Seeder
         ]);
         $supervisorUser = User::create([
             'name' => 'Budi Pratama N',
-            'email' => 'budi.pratama33@domain.com',
+            'email' => 'budi.pratama33@gmail.com',
             'password' => bcrypt('password123'),
         ]);
         $supervisorUser->assignRole('Supervisor');  
@@ -102,7 +102,7 @@ class RoleSeeder extends Seeder
         ]);
         $storeManagerUser = User::create([
             'name' => 'Ivan Setiawan',
-            'email' => 'ivan.setiawan@domain.com',
+            'email' => 'ivan.setiawan@gmail.com',
             'password' => bcrypt('password123'),
         ]);
         $storeManagerUser->assignRole('Manajer Toko');  
@@ -115,7 +115,7 @@ class RoleSeeder extends Seeder
         ]);
         $warehouseUser = User::create([
             'name' => 'Dewi Kusuma N',
-            'email' => 'dewi.kusuma24@domain.com',
+            'email' => 'dewi.kusuma24@gmail.com',
             'password' => bcrypt('password123'),
         ]);
         $warehouseUser->assignRole('Gudang');
