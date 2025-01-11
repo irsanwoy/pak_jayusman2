@@ -11,6 +11,9 @@ class ProductSeeder extends Seeder
     {
         DB::table('products')->insert([
             [
+                'date' => now(),
+                'branch_id' => 1,
+                'employee_id' => 1,
                 'product_name' => 'Laptop',
                 'price' => 12000000,
                 'stock' => 50,
@@ -18,6 +21,9 @@ class ProductSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'date' => now(),
+                'branch_id' => 1,
+                'employee_id' => 1,
                 'product_name' => 'Smartphone',
                 'price' => 8000000,
                 'stock' => 30,
@@ -25,6 +31,9 @@ class ProductSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'date' => now(),
+                'branch_id' => 1,
+                'employee_id' => 1,
                 'product_name' => 'Headphones',
                 'price' => 500000,
                 'stock' => 100,

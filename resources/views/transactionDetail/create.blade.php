@@ -12,6 +12,30 @@
                     <!-- Form untuk membuat detail transaksi baru -->
                     <form action="{{ route('transactionDetail.store') }}" method="POST" class="space-y-6">
                         @csrf
+                        <div>
+                            <label for="date" class="block text-sm font-medium text-gray-700">Transaction Date</label>
+                            <input type="date" name="date" id="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                        </div>
+
+                        <!-- Cabang -->
+                        <div>
+                            <label for="branch_id" class="block text-sm font-medium text-gray-700">Branch</label>
+                            <select name="branch_id" id="branch_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @foreach ($branches as $branch)
+                                    <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Pegawai -->
+                        <div>
+                            <label for="employee_id" class="block text-sm font-medium text-gray-700">Employee</label>
+                            <select name="employee_id" id="employee_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @foreach ($employees as $employee)
+                                    <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                 
                         <div>

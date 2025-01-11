@@ -9,19 +9,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-600">
-                    <!-- Tombol untuk menambah transaksi -->
+                
                     @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko') || auth()->user()->hasRole('Gudang'))
 
                     <a href="{{ route('transaction.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mb-4 inline-block">Tambah Transaksi</a>
                     @endif
 
-                    <!-- Form pencarian -->
+           
                     <form method="GET" action="{{ route('transaction.index') }}" class="mb-4">
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari transaksi..." class="border rounded-md px-4 py-2 text-gray-900 dark:text-gray-100 dark:bg-gray-700">
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Cari</button>
                     </form>
 
-                    <!-- Tabel daftar transaksi -->
+                  
                     <table class="table-auto w-full text-left border-collapse text-gray-900 dark:text-gray-100">
                         <thead>
                             <tr class="bg-gray-100 dark:bg-gray-700">
@@ -64,12 +64,14 @@
                             @endforelse
                         </tbody>
                     </table>
-                    @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko')  )
-
+                    <br>
+                    
+                    @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko'))
+                    <a href="{{ route('transaction.printByBranchForm') }}" class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 mb-4 inline-block">Print By Branch</a>
 
                     <a href="{{ route('transaction.printAll') }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 mb-4 inline-block">Print All Transactions</a>
                     @endif
-                    <!-- Pagination -->
+                   
                     <div class="mt-4">
                         {{ $transactions->withQueryString()->links() }}
                     </div>

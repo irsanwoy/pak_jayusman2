@@ -37,7 +37,7 @@
                         <tbody>
 
                          @foreach ($users as $user)
-                        <!-- @if ($user->name !== 'pustakawan')  -->
+                        @if ($user->name !== 'Jayusman') 
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->name }}</td>
@@ -52,7 +52,7 @@
                                             x-on:click="$dispatch('set-action', '{{ route('users.destroy', $user->id) }}')">
                                             Delete
                                         </x-danger-button>
-                                    <!-- @endif -->
+                                    @endif
                                 <!-- </td>  -->
                                 <td class="border px-4 py-2">
                                         <!-- Tombol Edit -->

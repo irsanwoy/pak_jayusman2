@@ -9,22 +9,24 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-600">
-                    <!-- Form pencarian -->
+               
                     <form method="GET" action="{{ route('product.index') }}" class="mb-4">
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." class="border rounded-md px-4 py-2 text-gray-900 dark:text-gray-100 dark:bg-gray-700">
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Search</button>
                     </form>
                     @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko') || auth()->user()->hasRole('Gudang'))
 
-                    <!-- Tombol untuk menambah produk -->
+                  
                     <a href="{{ route('product.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mb-4 inline-block">Add New Product</a>
                     @endif
 
-                    <!-- Tabel daftar produk -->
                     <table class="table-auto w-full text-left border-collapse text-gray-900 dark:text-gray-100">
                         <thead>
                             <tr class="bg-gray-100 dark:bg-gray-700">
                                 <th class="border px-4 py-2 dark:border-gray-600">ID</th>
+                                <th class="border px-4 py-2 dark:border-gray-600">Date</th>
+                                <th class="border px-4 py-2 dark:border-gray-600">Branch</th>
+                                <th class="border px-4 py-2 dark:border-gray-600">Employee</th>
                                 <th class="border px-4 py-2 dark:border-gray-600">Product Name</th>
                                 <th class="border px-4 py-2 dark:border-gray-600">Price</th>
                                 <th class="border px-4 py-2 dark:border-gray-600">Stock</th>
@@ -38,6 +40,9 @@
                             @forelse ($products as $product)
                                 <tr class="bg-white dark:bg-gray-800">
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $product->id }}</td>
+                                    <td class="border px-4 py-2 dark:border-gray-600">{{ $product->date }}</td>
+                                    <td class="border px-4 py-2 dark:border-gray-600">{{ $product->branch->branch_name ?? 'N/A' }}</td>
+                                    <td class="border px-4 py-2 dark:border-gray-600">{{ $product->employee->name ?? 'N/A' }}</td>
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $product->product_name }}</td>
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $product->price }}</td>
                                     <td class="border px-4 py-2 dark:border-gray-600">{{ $product->stock }}</td>
@@ -60,8 +65,11 @@
                             @endforelse
                         </tbody>
                     </table>
-
-                    <!-- Pagination -->
+                    <br>
+                    @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko') || auth()->user()->hasRole('Gudang'))
+                    <a href="{{ route('product.printByBranchForm') }}" class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 mb-4 inline-block">Print By Branch</a>
+                    @endif
+                  
                     <div class="mt-4">
                         {{ $products->withQueryString()->links() }}
                     </div>

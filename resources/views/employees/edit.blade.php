@@ -28,7 +28,7 @@
                             <input type="number" name="branch_id" id="branch_id" value="{{ old('branch_id', $employee->branch_id) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
                         </div>
 
-                        <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Perbarui</button>
+                        <button type="submit"  href="{{ route('employee.index') }}" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Perbarui</button>
                     </form>
                 </div>
             </div>

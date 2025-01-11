@@ -9,10 +9,18 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_name', 'price', 'stock'];
+    protected $fillable = ['date', 'branch_id', 'product_name', 'price', 'stock'];
 
     public function transactionDetails()
     {
         return $this->hasMany(TransactionDetail::class);
+    }
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
     }
 }
