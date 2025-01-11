@@ -82,4 +82,3 @@
         });
     </script>
 </x-app-layout>
-

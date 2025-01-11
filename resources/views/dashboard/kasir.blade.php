@@ -3,45 +3,63 @@
         <h1 class="text-3xl font-extrabold text-center text-gray-800 dark:text-white mb-6">Dashboard Kasir</h1>
 
         <!-- Form for Transactions -->
-        <form method="POST" action="{{ route('transaction.store') }}" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+        {{-- <form action="{{ route('transactionDetail.store') }}" method="POST" class="space-y-6">
             @csrf
 
-            <!-- Product Input -->
-            <div class="mb-4">
-                <label for="product" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Product</label>
-                <input 
-                    type="text" 
-                    name="product" 
-                    id="product" 
-                    class="form-input mt-1 block w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
-                    placeholder="Enter product name"
-                    required>
+    
+            <div>
+                <label for="product_id" class="block text-sm font-medium text-gray-700">Product</label>
+                <select name="product_id" id="product_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                    <option value="" data-price="0">-- Select Product --</option>
+                    @foreach ($products as $product)
+                        <option value="{{ $product->id }}" data-price="{{ $product->price }}">
+                            {{ $product->product_name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div> --}}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                
+                <div class="bg-gradient-to-r from-green-500 to-teal-500 text-white p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
+                    <h2 class="text-2xl font-semibold">Tambah Transaksi Baru</h2>
+                    {{-- <p class="text-4xl font-bold">{{ $totalTransactions }}</p> --}}
+                
+                    <!-- Tombol untuk menuju ke halaman tambah transaksi baru -->
+                    <a href="{{ route('transactionDetail.create') }}" class="mt-4 inline-block bg-white text-green-500 font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition duration-300">
+                        Tambah Transaksi
+                    </a>
+                </div>
+                
+                
+            </div>
+            {{-- <div class="mt-4">
+                <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
+                <input type="number" id="quantity" name="quantity" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" min="1" value="1">
+            </div>
+            
+            <div class="mt-4">
+                <label for="total_price" class="block text-sm font-medium text-gray-700">Total Price</label>
+                <input type="text" id="total_price" name="total_price" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" readonly>
+            </div> --}}
+            
+            
+            
+         
+            <!-- Price (Auto-filled) -->
+            {{-- <div>
+                <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                <input type="number" name="price" id="price" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" readonly>
             </div>
 
-            <!-- Amount Input -->
-            <div class="mb-4">
-                <label for="amount" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Amount</label>
-                <input 
-                    type="number" 
-                    name="amount" 
-                    id="amount" 
-                    class="form-input mt-1 block w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
-                    placeholder="Enter amount"
-                    required>
+            <!-- Tombol Simpan -->
+            <div class="flex justify-end space-x-4">
+                <a href="{{ route('transactionDetail.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Cancel</a>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Save</button>
             </div>
-
-            <!-- Submit Button -->
-            <div class="flex justify-end">
-                <button 
-                    type="submit" 
-                    class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-indigo-600 hover:to-blue-500 text-white px-6 py-2 rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    Submit Transaction
-                </button>
-            </div>
-        </form>
+        </form> --}}
 
         <!-- Additional Features: Recent Transactions -->
-        <div class="mt-8">
+        {{-- <div class="mt-8">
             <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Recent Transactions</h2>
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
                 <table class="table-auto w-full text-left text-gray-700 dark:text-gray-300">
@@ -69,6 +87,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
     </div>
 </x-app-layout>

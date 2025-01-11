@@ -6,77 +6,37 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
                 <h2 class="text-2xl font-semibold">Total Users</h2>
-                <p class="text-4xl font-bold">100</p>
-                <p class="mt-2 text-sm">New: 10 Today</p>
+                <p class="text-4xl font-bold">{{ $totalUsers }}</p>
             </div>
             <div class="bg-gradient-to-r from-green-500 to-teal-500 text-white p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
                 <h2 class="text-2xl font-semibold">Total Transactions</h2>
-                <p class="text-4xl font-bold">$5,000</p>
-                <p class="mt-2 text-sm">This Week: +15%</p>
+                <p class="text-4xl font-bold">{{ $totalTransactions }}</p>
             </div>
             <div class="bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
                 <h2 class="text-2xl font-semibold">Total Products</h2>
-                <p class="text-4xl font-bold">150</p>
-                <p class="mt-2 text-sm">Updated: 5 New</p>
+                <p class="text-4xl font-bold">{{ $totalProducts }}</p>
             </div>
         </div>
 
-        <!-- Grafik dan Statistik -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                <h2 class="text-xl font-semibold mb-4">User Growth</h2>
-                <canvas id="userGrowthChart"></canvas>
-            </div>
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                <h2 class="text-xl font-semibold mb-4">Revenue Over Time</h2>
-                <canvas id="revenueChart"></canvas>
-            </div>
-        </div>
+        
 
-        <!-- Tabel Aktivitas Terbaru -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
-            <h2 class="text-xl font-semibold mb-4">Recent Activities</h2>
-            <table class="table-auto w-full text-left">
-                <thead>
-                    <tr class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
-                        <th class="px-4 py-2">Activity</th>
-                        <th class="px-4 py-2">User</th>
-                        <th class="px-4 py-2">Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="px-4 py-2">Logged In</td>
-                        <td class="px-4 py-2">User A</td>
-                        <td class="px-4 py-2">5 mins ago</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2">Purchased Product</td>
-                        <td class="px-4 py-2">User B</td>
-                        <td class="px-4 py-2">10 mins ago</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2">Updated Profile</td>
-                        <td class="px-4 py-2">User C</td>
-                        <td class="px-4 py-2">15 mins ago</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      <!-- Quick Actions -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <button 
+        onclick="window.location.href='{{ route('users.create') }}'" 
+        class="bg-blue-500 text-white py-4 rounded-lg shadow-lg transform transition duration-300 hover:bg-blue-600">
+        Add New User
+    </button>
+    <button>
+        {{-- onclick="window.location.href='{{ route('transactions.pdf_all') }}'" 
+        class="bg-green-500 text-white py-4 rounded-lg shadow-lg transform transition duration-300 hover:bg-green-600">
+        Generate Report --}}
+    </button>
+    <a href="{{ route('product.index') }}" class="bg-red-500 text-white py-4 rounded-lg shadow-lg transform transition duration-300 hover:bg-red-600 text-center flex items-center justify-center">
+        Manage Products
+    </a>
+</div>
 
-        <!-- Quick Actions -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <button class="bg-blue-500 text-white py-4 rounded-lg shadow-lg transform transition duration-300 hover:bg-blue-600">
-                Add New User
-            </button>
-            <button class="bg-green-500 text-white py-4 rounded-lg shadow-lg transform transition duration-300 hover:bg-green-600">
-                Generate Report
-            </button>
-            <button class="bg-red-500 text-white py-4 rounded-lg shadow-lg transform transition duration-300 hover:bg-red-600">
-                Manage Products
-            </button>
-        </div>
-    </div>
 
     <!-- Chart.js Script -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

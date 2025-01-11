@@ -11,6 +11,12 @@ class Product extends Model
 
     protected $fillable = ['product_name', 'price', 'stock'];
 
+    // Relasi ke Transaction
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
     public function transactionDetails()
     {
         return $this->hasMany(TransactionDetail::class);
