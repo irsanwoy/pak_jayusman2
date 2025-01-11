@@ -16,9 +16,7 @@
                             <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari pegawai..." class="border rounded-md px-4 py-2 text-gray-900 dark:text-gray-100 dark:bg-gray-700">
                             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Cari</button>
                         </form>
-                       
-                        
-                        
+ 
                         <form action="{{ route('employee.index') }}" method="GET" class="flex items-center space-x-2">
                             <label for="branch_id" class="text-gray-700 dark:text-gray-100">Pilih Cabang:</label>
                             <select name="branch_id" id="branch_id" class="border rounded-md px-4 py-2 text-gray-900 dark:text-gray-100 dark:bg-gray-700">

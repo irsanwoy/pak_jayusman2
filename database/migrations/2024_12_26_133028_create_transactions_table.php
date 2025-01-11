@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->foreignId('branch_id')->constrained('branches')->onDelete('cascade');
-            $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
+            $table->date('date')->default(DB::raw('CURRENT_DATE'));
+            $table->foreignId('branch_id')->nullable()->constrained('branches')->onDelete('cascade');
+            $table->foreignId('employee_id')->nullable()->constrained('employees')->onDelete('cascade');
             $table->decimal('total', 10, 2);
             $table->timestamps();
         });

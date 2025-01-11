@@ -23,10 +23,14 @@ class TransactionDetailController extends Controller
                   $q->where('product_name', 'like', '%' . $search . '%');
               });
     }
+    
+    if ($request->has('branch_id') && $request->branch_id != '') {
+        $query->where('branch_id', $request->branch_id);
+    }
 
     $transactionDetails = $query->paginate(5);
 
-    return view('transactionDetail.index', compact('transactionDetails'));
+    return view('transactionDetail.index', compact('transactionDetails', 'branches'));
 }
 
 

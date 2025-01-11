@@ -10,10 +10,26 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-600">
                
-                    <form method="GET" action="{{ route('product.index') }}" class="mb-4">
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." class="border rounded-md px-4 py-2 text-gray-900 dark:text-gray-100 dark:bg-gray-700">
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Search</button>
+                <div class="flex items-center space-x-4 mb-4">
+                    
+                    <form method="GET" action="{{ route('product.index') }}" class="flex items-center space-x-2">
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari produk..." class="border rounded-md px-4 py-2 text-gray-900 dark:text-gray-100 dark:bg-gray-700">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Cari</button>
                     </form>
+
+                    <form action="{{ route('product.index') }}" method="GET" class="flex items-center space-x-2">
+                        <label for="branch_id" class="text-gray-700 dark:text-gray-100">Pilih Cabang:</label>
+                        <select name="branch_id" id="branch_id" class="border rounded-md px-4 py-2 text-gray-900 dark:text-gray-100 dark:bg-gray-700">
+                            <option value="">-- Semua Cabang --</option>
+                            @foreach($branches as $branch)
+                                <option value="{{ $branch->id }}" {{ request('branch_id') == $branch->id ? 'selected' : '' }}>
+                                    {{ $branch->branch_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Lihat Berdasarkan Cabang</button>
+                    </form>
+                </div>
                     @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Manajer Toko') || auth()->user()->hasRole('Gudang'))
 
                   

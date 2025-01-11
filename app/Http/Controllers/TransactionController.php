@@ -30,10 +30,14 @@ class TransactionController extends Controller
                   });
         }
     
-        // Pagination
-        $transactions = $query->paginate(5);
+        if ($request->has('branch_id') && $request->branch_id != '') {
+            $query->where('branch_id', $request->branch_id);
+        }
     
-        return view('transactions.index', compact('transactions'));
+        $transactions = $query->paginate(5);
+
+    
+        return view('transactions.index', compact('transactions', 'branches'));
     }
     
 

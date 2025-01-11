@@ -20,7 +20,9 @@ class ProductController extends Controller
                   ->orWhere('price', 'like', '%' . $search . '%')
                   ->orWhere('stock', 'like', '%' . $search . '%');
         }
-
+        if ($request->has('branch_id') && $request->branch_id != '') {
+            $query->where('branch_id', $request->branch_id);
+        }
 
         $products = $query->paginate(5);
 
