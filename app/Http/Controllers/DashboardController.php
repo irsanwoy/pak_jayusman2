@@ -35,6 +35,38 @@ class DashboardController extends Controller
     return view('dashboard.kasir', compact('products'));
     }
 
+<<<<<<< HEAD
+=======
+    public function supervisor()
+    {
+        // ini yang masin data dummy
+        // return view('dashboard.supervisor'); 
+
+        // Ambil jumlah transaksi per kasir (asumsi ada kolom kasir_id di tabel transaksi)
+    // $kasir1Transactions = Transaction::where('employee_id', 1)->count();
+    // $kasir2Transactions = Transaction::where('employee_id', 2)->count();
+    
+    // Ambil data produk dan stok
+    // $products = Product::all(); // Sesuaikan dengan query yang diperlukan
+    
+    // Kirim data ke view
+    // return view('dashboard.supervisor', compact('kasir1Transactions', 'kasir2Transactions', 'products'));
+
+
+    // Performance per kasir
+    $teamPerformance = Transaction::select('employee_id', DB::raw('COUNT(*) as transaction_count'))
+        ->groupBy('employee_id')
+        ->with('employee') // Relasi ke Employee
+        ->get();
+
+    // Produk dengan stok rendah atau habis
+    $stockAlerts = Product::where('stock', '<=', 10)->get();
+
+    return view('dashboard.supervisor', compact('teamPerformance', 'stockAlerts'));
+
+
+    }
+>>>>>>> 46c42614a99f602985da2840c0f462ebc13d58c6
 
     public function manajer()
     {
