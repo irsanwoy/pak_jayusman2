@@ -6,15 +6,21 @@
         <div class="grid grid-cols-3 gap-4 mb-6">
             <div class="bg-white dark:bg-gray-800 rounded shadow p-4">
                 <h2 class="text-lg font-semibold">Pendapatan Hari Ini</h2>
-                <p class="text-2xl font-bold text-green-500">Rp 5.000.000</p>
+                <p class="text-2xl font-bold text-green-500">
+                    Rp {{ number_format($pendapatanHariIni, 0, ',', '.') }}
+                </p>
             </div>
             <div class="bg-white dark:bg-gray-800 rounded shadow p-4">
                 <h2 class="text-lg font-semibold">Pendapatan Minggu Ini</h2>
-                <p class="text-2xl font-bold text-green-500">Rp 25.000.000</p>
+                <p class="text-2xl font-bold text-green-500">
+                    Rp {{ number_format($pendapatanMingguIni, 0, ',', '.') }}
+                </p>
             </div>
             <div class="bg-white dark:bg-gray-800 rounded shadow p-4">
                 <h2 class="text-lg font-semibold">Pendapatan Bulan Ini</h2>
-                <p class="text-2xl font-bold text-green-500">Rp 100.000.000</p>
+                <p class="text-2xl font-bold text-green-500">
+                    Rp {{ number_format($pendapatanBulanIni, 0, ',', '.') }}
+                </p>
             </div>
         </div>
 
@@ -36,21 +42,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="px-4 py-2">Kasir A</td>
-                        <td class="px-4 py-2">50</td>
-                        <td class="px-4 py-2">Rp 10.000.000</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2">Kasir B</td>
-                        <td class="px-4 py-2">40</td>
-                        <td class="px-4 py-2">Rp 8.000.000</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2">Kasir C</td>
-                        <td class="px-4 py-2">30</td>
-                        <td class="px-4 py-2">Rp 6.000.000</td>
-                    </tr>
+                    @foreach($kinerjaTim as $tim)
+                        <tr>
+                            <td class="px-4 py-2">{{ $tim->employee->name }}</td>
+                            <td class="px-4 py-2">{{ $tim->jumlah_transaksi }}</td>
+                            <td class="px-4 py-2">Rp {{ number_format($tim->total_pendapatan, 0, ',', '.') }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -59,14 +57,17 @@
     <!-- Script untuk Grafik -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        const produkLabels = @json($produkTerlaris->pluck('product.product_name'));
+        const produkData = @json($produkTerlaris->pluck('total_terjual'));
+
         const ctx = document.getElementById('topProductsChart').getContext('2d');
         const topProductsChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Produk A', 'Produk B', 'Produk C', 'Produk D', 'Produk E'],
+                labels: produkLabels,
                 datasets: [{
                     label: 'Penjualan',
-                    data: [50, 40, 30, 20, 10],
+                    data: produkData,
                     backgroundColor: 'rgba(75, 192, 192, 0.5)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1

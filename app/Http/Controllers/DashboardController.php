@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
@@ -74,32 +75,33 @@ class DashboardController extends Controller
 
     public function manajer()
     {
-        // ini yang masin data dummy
-        return view('dashboard.manajer'); 
-
-        // menggunakan data di database
-        // $todayRevenue = Transaction::whereDate('created_at', today())->sum('total');
-
-        // // Pendapatan Minggu Ini
-        // $weekRevenue = Transaction::whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->sum('total');
-
-        // // Pendapatan Bulan Ini
-        // $monthRevenue = Transaction::whereMonth('created_at', now()->month)->sum('total');
-
-        // // Produk Terlaris
-        // $topProducts = Product::withCount('transactions') 
-        //                     ->orderByDesc('transactions_count')
-        //                     ->limit(5)
-        //                     ->get();
-
-        // // Kinerja Tim Kasir (total transaksi dan pendapatan per kasir)
-        // $kasirPerformance = Transaction::select('id', DB::raw('count(*) as transaction_count'), DB::raw('sum(total) as total_revenue'))
-        //                             ->groupBy('id')
-        //                             ->get();
-
-        // // Kirim data ke view
-        // return view('dashboard.store-manager', compact('todayRevenue', 'weekRevenue', 'monthRevenue', 'topProducts', 'kasirPerformance'));
+        $pendapatanHariIni = Transaction::whereDate('date', today())->sum('total');
+        $pendapatanMingguIni = Transaction::whereBetween('date', [now()->startOfWeek(), now()->endOfWeek()])->sum('total');
+        $pendapatanBulanIni = Transaction::whereMonth('date', now()->month)->whereYear('date', now()->year)->sum('total');
+    
+        $produkTerlaris = TransactionDetail::select('product_id', DB::raw('SUM(quantity) as total_terjual'))
+            ->groupBy('product_id')
+            ->orderByDesc('total_terjual')
+            ->take(5)
+            ->with('product') // Relasi ke tabel `products`
+            ->get();
+    
+        $kinerjaTim = Transaction::select('employee_id', DB::raw('COUNT(*) as jumlah_transaksi'), DB::raw('SUM(total) as total_pendapatan'))
+            ->groupBy('employee_id')
+            ->with('employee') // Relasi ke tabel `employees`
+            ->get();
+    
+        return view('dashboard.manajer', compact(
+            'pendapatanHariIni',
+            'pendapatanMingguIni',
+            'pendapatanBulanIni',
+            'produkTerlaris',
+            'kinerjaTim'
+        ));
     }
+    
+
+    
 
     public function gudang()
     {
