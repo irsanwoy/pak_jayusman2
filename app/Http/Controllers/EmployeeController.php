@@ -12,24 +12,28 @@ use App\Models\User;
 class EmployeeController extends Controller
 {
     public function index(Request $request)
-{
-    $query = Employee::query();
+    {
+        $query = Employee::query();
 
-    // Search functionality
-    if ($request->has('search')) {
-        $search = $request->input('search');
-        $query->where('name', 'like', '%' . $search . '%')
-              ->orWhere('position', 'like', '%' . $search . '%')
-              ->orWhereHas('branch', function ($q) use ($search) {
-                  $q->where('branch_name', 'like', '%' . $search . '%');
-              });
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('position', 'like', '%' . $search . '%')
+                  ->orWhereHas('branch', function ($q) use ($search) {
+                      $q->where('branch_name', 'like', '%' . $search . '%');
+                  });
+        }
+
+        if ($request->has('branch_id') && $request->branch_id != '') {
+            $query->where('branch_id', $request->branch_id);
+        }
+
+ 
+        $employees = $query->paginate(5);
+        $branches = Branch::all();  
+
+        return view('employees.index', compact('employees', 'branches'));
     }
-
-    // Pagination
-    $employees = $query->paginate(5);
-
-    return view('employees.index', compact('employees'));
-}
 
     public function create()
     {

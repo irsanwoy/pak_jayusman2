@@ -15,8 +15,8 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         $query = Transaction::query();
-    
-        // Search functionality
+        $branches = Branch::all();
+   
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where('id', 'like', '%' . $search . '%')
@@ -61,7 +61,6 @@ class TransactionController extends Controller
         return redirect()->back()->withErrors(['error' => 'Stok tidak mencukupi']);
     }
 
-    // Debug sebelum mengurangi stok
     dd([
         'Product ID' => $product->id,
         'Stock Sebelum' => $product->stock,
@@ -71,7 +70,7 @@ class TransactionController extends Controller
     $product->stock -= $request->quantity;
     $product->save();
 
-    // Debug setelah mengurangi stok
+  
     if ($product->wasChanged('stock')) {
         dd('Stok berhasil dikurangi');
     } else {
@@ -109,26 +108,48 @@ class TransactionController extends Controller
 
     public function printTransaction($id)
 {
-    // Ambil data transaksi berdasarkan ID
+
     $transaction = Transaction::with('branch', 'employee', 'transactionDetails')->findOrFail($id);
 
-    // Generate PDF menggunakan view Blade
     $pdf = Pdf::loadView('transactions.pdf', compact('transaction'));
 
-    // Unduh atau tampilkan file PDF
     return $pdf->stream('transaction_' . $transaction->id . '.pdf');
 }
 
 public function printAllTransactions()
 {
-    // Ambil semua data transaksi
+    
     $transactions = Transaction::with('branch', 'employee')->get();
 
-    // Generate PDF menggunakan view Blade
     $pdf = Pdf::loadView('transactions.pdf_all', compact('transactions'));
 
-    // Unduh atau tampilkan file PDF
     return $pdf->stream('all_transactions.pdf');
+}
+
+public function printByBranchForm()
+{
+    $branches = Branch::all();
+    return view('transactions.print_by_branch', compact('branches'));
+}
+
+public function printByBranch(Request $request)
+{
+    $request->validate([
+        'branch_id' => 'required|exists:branches,id',
+    ]);
+
+    $branchId = $request->branch_id;
+    $transactions = Transaction::with('branch', 'employee', 'transactionDetails')
+        ->where('branch_id', $branchId)
+        ->get();
+
+    if ($transactions->isEmpty()) {
+        return redirect()->back()->with('error', 'Tidak ada transaksi untuk cabang yang dipilih.');
+    }
+
+    $pdf = Pdf::loadView('transactions.pdf_by_branch', compact('transactions'));
+
+    return $pdf->stream('transactions_branch_' . $branchId . '.pdf');
 }
 
 }

@@ -80,7 +80,8 @@ Route::prefix('products')->name('product.')->group(function () {
     Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('edit');
     Route::put('/{product}', [ProductController::class, 'update'])->name('update');
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
-
+    Route::get('/print-by-branch', [ProductController::class, 'printByBranchForm'])->name('printByBranchForm');
+    Route::post('/print-by-branch', [ProductController::class, 'printByBranch'])->name('printByBranch');
 });
 
 Route::prefix('branches')->name('branch.')->group(function () {
@@ -99,11 +100,13 @@ Route::prefix('transactions')->name('transaction.')->group(function () {
     Route::get('/{transaction}/edit', [TransactionController::class, 'edit'])->name('edit');
     Route::put('/{transaction}', [TransactionController::class, 'update'])->name('update');
     Route::delete('/{transaction}', [TransactionController::class, 'destroy'])->name('destroy');
-
     Route::get('/{id}/print', [TransactionController::class, 'printTransaction'])->name('print');
-Route::get('/print-all', [TransactionController::class, 'printAllTransactions'])->name('printAll');
-
+    Route::get('/print-all', [TransactionController::class, 'printAllTransactions'])->name('printAll');
+    Route::get('/print-by-branch', [TransactionController::class, 'printByBranchForm'])->name('printByBranchForm'); 
+    Route::post('/print-by-branch', [TransactionController::class, 'printByBranch'])->name('printByBranch'); 
 });
+
+
 
 Route::prefix('transaction-details')->name('transactionDetail.')->group(function () {
     Route::get('/', [TransactionDetailController::class, 'index'])->name('index');
@@ -112,8 +115,8 @@ Route::prefix('transaction-details')->name('transactionDetail.')->group(function
     Route::get('/{transactionDetail}/edit', [TransactionDetailController::class, 'edit'])->name('edit');
     Route::put('/{transactionDetail}', [TransactionDetailController::class, 'update'])->name('update');
     Route::delete('/{transactionDetail}', [TransactionDetailController::class, 'destroy'])->name('destroy');
-
-    // print
+    Route::get('/print-by-branch', [TransactionDetailController::class, 'printByBranchForm'])->name('printByBranchForm'); 
+    Route::post('/print-by-branch', [TransactionDetailController::class, 'printByBranch'])->name('printByBranch'); 
     Route::get('/{id}/print', [TransactionDetailController::class, 'printDetail'])->name('print');
     Route::get('/print-all', [TransactionDetailController::class, 'printAllDetails'])->name('printAll');
 });
